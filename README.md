@@ -1,9 +1,6 @@
-# Disaster-Tweets
-#Data Preparation
-# 1. Data Loading and Preprocessing
+
 df = pd.read_csv(r"/content/train.csv")
 
-# Handling missing values with imputation
 imputer = SimpleImputer(strategy='most_frequent')  # Replace with your preferred strategy
 df[['keyword', 'location']] = imputer.fit_transform(df[['keyword', 'location']])
 
