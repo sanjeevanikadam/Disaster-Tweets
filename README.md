@@ -1,20 +1,29 @@
+# Data Preprocessing Script
 
-df = pd.read_csv(r"/content/train.csv")
+## Description
+This script performs data loading and preprocessing for a dataset, including handling missing values, text cleaning, and lemmatization. It is designed to prepare textual data for machine learning or natural language processing (NLP) tasks.
 
-imputer = SimpleImputer(strategy='most_frequent')  # Replace with your preferred strategy
-df[['keyword', 'location']] = imputer.fit_transform(df[['keyword', 'location']])
+---
 
-stop_words = set(stopwords.words('english'))
-lemmatizer = WordNetLemmatizer()
+## Features
+- Loads a dataset from a CSV file.
+- Handles missing values using the `SimpleImputer` class from `sklearn`.
+- Cleans text data by:
+  - Removing non-alphanumeric characters.
+  - Converting text to lowercase.
+  - Removing stopwords.
+  - Applying lemmatization to reduce words to their base forms.
 
-def preprocess_text(text):
-    if isinstance(text, str):
-        text = re.sub(r'[^a-zA-Z\s]', '', text)  # Remove non-alphanumeric characters
-        text = text.lower()
-        tokens = nltk.word_tokenize(text)
-        tokens = [lemmatizer.lemmatize(token) for token in tokens if token not in stop_words]  # Lemmatization
-        return tokens
-    else:
-        return []
+---
 
-df['processed_text'] = df['text'].apply(preprocess_text)
+## Dependencies
+Ensure the following Python libraries are installed:
+- `pandas`
+- `nltk`
+- `sklearn`
+- `re`
+
+To install missing libraries, run:
+```bash
+pip install pandas nltk scikit-learn
+
